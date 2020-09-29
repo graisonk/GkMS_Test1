@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GkMS_Test1.Domain.Core", "G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.Infra.Bus", "GkMS_Test1.Infra.Bus\GkMS_Test1.Infra.Bus.csproj", "{840209B0-AA1F-47BB-AC26-72151AC0C6C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.Infra.IoC", "GkMS_Test1.Infra.IoC\GkMS_Test1.Infra.IoC.csproj", "{6C6A532D-E719-4958-907A-1C2CF5B3B6F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{840209B0-AA1F-47BB-AC26-72151AC0C6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{840209B0-AA1F-47BB-AC26-72151AC0C6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{840209B0-AA1F-47BB-AC26-72151AC0C6C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C6A532D-E719-4958-907A-1C2CF5B3B6F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C6A532D-E719-4958-907A-1C2CF5B3B6F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C6A532D-E719-4958-907A-1C2CF5B3B6F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C6A532D-E719-4958-907A-1C2CF5B3B6F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{320F2450-DB23-4BBD-B62B-8FC65B38BB54} = {AA64B4BB-7C9C-4017-A36F-E18F3555C21A}
 		{840209B0-AA1F-47BB-AC26-72151AC0C6C7} = {5C8BC650-51C2-4DCD-8CB8-3F528A502E0B}
+		{6C6A532D-E719-4958-907A-1C2CF5B3B6F4} = {286F1D0D-2C17-428D-997A-2DE1F3CC35A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03B9E7AB-3F66-4F9C-9E4E-0848B517372D}
