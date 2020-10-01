@@ -1,11 +1,15 @@
 ﻿using MediatR;
 using GkMS_Test1.Domain.Core.Bus;
 using GkMS_Test1.Infra.Bus;
-
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using GkMS_Test1.Users.Application.Interfaces;
+using GkMS_Test1.Users.Application.Services;
+using GkMS_Test1.Users.Domain.Interfaces;
+using GkMS_Test1.Users.Data.Repository;
+using GkMS_Test1.Users.Data.Context;
 
 namespace GkMS_Test1.Infra.IoC
 {
@@ -19,7 +23,13 @@ namespace GkMS_Test1.Infra.IoC
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
                 return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
             });
-            
+
+            //Application Services
+            services.AddTransient<IUserService, UserService>();
+
+            //Data
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<UserDbContext>();
         }
     }
 }

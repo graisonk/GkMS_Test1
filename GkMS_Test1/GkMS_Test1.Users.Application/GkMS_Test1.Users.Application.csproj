@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GkMS_Test1.Users.Domain\GkMS_Test1.Users.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
