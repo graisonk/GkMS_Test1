@@ -10,6 +10,8 @@ using GkMS_Test1.Users.Application.Services;
 using GkMS_Test1.Users.Domain.Interfaces;
 using GkMS_Test1.Users.Data.Repository;
 using GkMS_Test1.Users.Data.Context;
+using GkMS_Test1.Users.Domain.Commands;
+using GkMS_Test1.Users.Domain.CommandHandlers;
 
 namespace GkMS_Test1.Infra.IoC
 {
@@ -23,6 +25,9 @@ namespace GkMS_Test1.Infra.IoC
                 var scopeFactory = sp.GetRequiredService<IServiceScopeFactory>();
                 return new RabbitMQBus(sp.GetService<IMediator>(), scopeFactory);
             });
+
+            //Domain Commands
+            services.AddTransient<IRequestHandler<CreatePrinterCommand, bool>, PrinterCommandHandler>();
 
             //Application Services
             services.AddTransient<IUserService, UserService>();

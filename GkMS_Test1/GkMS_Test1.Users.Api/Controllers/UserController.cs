@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GkMS_Test1.Users.Application.Interfaces;
+using GkMS_Test1.Users.Application.Models;
 using GkMS_Test1.Users.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,13 @@ namespace GkMS_Test1.Users.Api.Controllers
         public ActionResult<IEnumerable<User>> Get()
         {
             return Ok(_userService.GetUsers());
+        }
+
+        [HttpPost]
+        public IActionResult Post([FromBody] UserPrinter userPrinter)
+        {
+            _userService.AssignPrinter(userPrinter);
+            return Ok(userPrinter);
         }
     }
 }

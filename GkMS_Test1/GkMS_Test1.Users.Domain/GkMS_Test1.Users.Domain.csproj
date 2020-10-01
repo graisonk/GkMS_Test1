@@ -5,14 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Events\" />
     <Folder Include="EventHandlers\" />
-    <Folder Include="Commands\" />
-    <Folder Include="CommandHandlers\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GkMS_Test1.Domain.Core\GkMS_Test1.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
