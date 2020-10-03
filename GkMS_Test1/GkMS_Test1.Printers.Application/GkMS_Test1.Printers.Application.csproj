@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GkMS_Test1.Printers.Domain\GkMS_Test1.Printers.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

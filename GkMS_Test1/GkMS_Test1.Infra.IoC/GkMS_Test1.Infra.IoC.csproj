@@ -11,6 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\GkMS_Test1.Domain.Core\GkMS_Test1.Domain.Core.csproj" />
     <ProjectReference Include="..\GkMS_Test1.Infra.Bus\GkMS_Test1.Infra.Bus.csproj" />
+    <ProjectReference Include="..\GkMS_Test1.Printers.Application\GkMS_Test1.Printers.Application.csproj" />
+    <ProjectReference Include="..\GkMS_Test1.Printers.Data\GkMS_Test1.Printers.Data.csproj" />
     <ProjectReference Include="..\GkMS_Test1.Users.Application\GkMS_Test1.Users.Application.csproj" />
     <ProjectReference Include="..\GkMS_Test1.Users.Data\GkMS_Test1.Users.Data.csproj" />
     <ProjectReference Include="..\GkMS_Test1.Users.Domain\GkMS_Test1.Users.Domain.csproj" />
