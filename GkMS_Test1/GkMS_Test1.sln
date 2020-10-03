@@ -47,13 +47,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{5BD6A92B-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{F61891E1-85AE-4CE1-A89C-259D43999111}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.Printers.Api", "GkMS_Test1.Printers.Api\GkMS_Test1.Printers.Api.csproj", "{97A05153-8234-495F-AAB6-56D9D33C67E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GkMS_Test1.Printers.Api", "GkMS_Test1.Printers.Api\GkMS_Test1.Printers.Api.csproj", "{97A05153-8234-495F-AAB6-56D9D33C67E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.Printers.Data", "GkMS_Test1.Printers.Data\GkMS_Test1.Printers.Data.csproj", "{8F1CB6F8-C0D1-4911-96F9-A8957604368C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GkMS_Test1.Printers.Data", "GkMS_Test1.Printers.Data\GkMS_Test1.Printers.Data.csproj", "{8F1CB6F8-C0D1-4911-96F9-A8957604368C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.Printers.Domain", "GkMS_Test1.Printers.Domain\GkMS_Test1.Printers.Domain.csproj", "{58544A5E-22EA-4279-A353-403CEEA3C5B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GkMS_Test1.Printers.Domain", "GkMS_Test1.Printers.Domain\GkMS_Test1.Printers.Domain.csproj", "{58544A5E-22EA-4279-A353-403CEEA3C5B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.Printers.Application", "GkMS_Test1.Printers.Application\GkMS_Test1.Printers.Application.csproj", "{E89C49E5-9722-4C87-89D0-C0B5C198B6C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GkMS_Test1.Printers.Application", "GkMS_Test1.Printers.Application\GkMS_Test1.Printers.Application.csproj", "{E89C49E5-9722-4C87-89D0-C0B5C198B6C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GkMS_Test1.MVC", "GkMS_Test1.MVC\GkMS_Test1.MVC.csproj", "{469A84DC-345A-421E-9ED6-64F3810F7CC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{E89C49E5-9722-4C87-89D0-C0B5C198B6C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E89C49E5-9722-4C87-89D0-C0B5C198B6C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E89C49E5-9722-4C87-89D0-C0B5C198B6C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{469A84DC-345A-421E-9ED6-64F3810F7CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{469A84DC-345A-421E-9ED6-64F3810F7CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{469A84DC-345A-421E-9ED6-64F3810F7CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{469A84DC-345A-421E-9ED6-64F3810F7CC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -131,6 +137,7 @@ Global
 		{8F1CB6F8-C0D1-4911-96F9-A8957604368C} = {5BD6A92B-FB69-4289-BD24-F7016EC38969}
 		{58544A5E-22EA-4279-A353-403CEEA3C5B0} = {F61891E1-85AE-4CE1-A89C-259D43999111}
 		{E89C49E5-9722-4C87-89D0-C0B5C198B6C8} = {8471D9D4-E739-4CC2-BCBB-3A37DE765E8D}
+		{469A84DC-345A-421E-9ED6-64F3810F7CC8} = {63351002-BFDD-45D6-8554-D9674C326F47}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03B9E7AB-3F66-4F9C-9E4E-0848B517372D}

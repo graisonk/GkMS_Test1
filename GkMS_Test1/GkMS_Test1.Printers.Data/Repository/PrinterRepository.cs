@@ -16,10 +16,10 @@ namespace GkMS_Test1.Printers.Data.Repository
             _context = context;
         }
 
-        public async void Add(UserPrinter userPrinter)
+        public void Add(UserPrinter userPrinter)
         {
             _context.UserPrinters.Add(userPrinter);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public IEnumerable<Printer> GetPrinters()
