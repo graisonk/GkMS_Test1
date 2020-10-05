@@ -24,6 +24,25 @@ namespace GkMS_Test1.Printers.Api.Controllers
         public ActionResult<IEnumerable<Printer>> Get()
         {
             return Ok(_printerService.GetPrinters());
-        }        
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Printer> Get(int id)
+        {
+            return Ok(_printerService.GetPrinter(id));
+        }
+
+        [HttpPut("{id}")]
+        public void PutPrinter(int id, Printer printer)
+        {
+            _printerService.ModPrinter(id, printer);            
+        }
+
+        [HttpDelete("{id}")]
+        public void DeletePrinter(int id)
+        {
+            _printerService.DelPrinter(id);
+        }
+
     }
 }

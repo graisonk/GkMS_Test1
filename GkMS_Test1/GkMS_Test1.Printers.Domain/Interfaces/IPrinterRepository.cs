@@ -7,7 +7,10 @@ namespace GkMS_Test1.Printers.Domain.Interfaces
 {
     public interface IPrinterRepository
     {
-        IEnumerable<Printer> GetPrinters();        
+        IEnumerable<Printer> GetPrinters();
+        Printer GetPrinter(int id);
         void Add(UserPrinter userPrinter);
+        void ModifyPrinter(int id, Printer printer);
+        void DeletePrinter(int id);
     }
 }
