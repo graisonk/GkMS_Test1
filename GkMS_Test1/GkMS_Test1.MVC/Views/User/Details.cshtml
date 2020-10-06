@@ -1,0 +1,134 @@
+﻿@model GkMS_Test1.MVC.Models.UserProfileVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row">
+    <h4 class="col-md-4">Details - User</h4>
+    <div class="col-md-4">
+        <div id="DelConfirm" style="display: none" class="form-group">
+            <span style="font-style:italic;font-weight:bold;margin:6px 0;float:left;">Do you really want to Delete ? </span>
+            <form asp-action="Delete" asp-route-id=@Model.User.Id>
+                <input type="submit" value="Yes" class="btn btn-danger" style="margin: -2px 9px" />
+                <a href="#" class="btn btn-primary" onclick="DelProfile(false)">No</a>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div id="DelPrompt" class="form-group" style="float:right">
+            <a asp-action="Index">Back to List</a>
+            <span> | </span>
+            <a asp-action="Edit" asp-route-id=@Model.User.Id class="btn btn-primary">Edit</a>
+            <span> | </span>
+            <a href="#" class="btn btn-danger" onclick="DelProfile(true)">Delete</a>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="form-group">
+            <label asp-for="User.Name" class="control-label"></label>
+            <input asp-for="User.Name" class="form-control" />
+            <span asp-validation-for="User.Name" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Personal.Address_Bill" class="control-label">Current Address</label>
+                <textarea rows="4" asp-for="Personal.Address_Bill" class="form-control Address1"></textarea>
+                <span asp-validation-for="Personal.Address_Bill" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Personal.Address_Install" class="control-label">Permanent Address</label>
+                <input type="checkbox" id="chkCopy" />
+                <textarea rows="4" asp-for="Personal.Address_Install" class="form-control Address2"></textarea>
+                <span asp-validation-for="Personal.Address_Install" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="Personal.Phone" class="control-label"></label>
+            <input asp-for="Personal.Phone" class="form-control" />
+            <span asp-validation-for="Personal.Phone" class="text-danger"></span>
+        </div>
+
+        <div class=" form-group">
+            <label asp-for="Personal.Email" class="control-label"></label>
+            <input asp-for="Personal.Email" class="form-control" />
+            <span asp-validation-for="Personal.Email" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="form-group">
+            <label asp-for="User.GstNo" class="control-label"></label>
+            <input asp-for="User.GstNo" class="form-control" />
+            <span asp-validation-for="User.GstNo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="User.PanNo" class="control-label"></label>
+            <input asp-for="User.PanNo" class="form-control" />
+            <span asp-validation-for="User.PanNo" class="text-danger"></span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            <table id="tblData" title="Printers Installed" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Printer</th>
+                        <th>Installation Date</th>
+                        <th>Contract Period</th>
+                        <th>Deposit Amt.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        for (int i = 0; i < Model.UserPrinters.Count; i++)
+                        {
+                            int j = i + 1;
+
+                            <tr id=@Model.UserPrinters[i].Id>
+                                <td>
+                                    <select asp-for="UserPrinters[i].PrinterId" asp-items="ViewBag.List_Printers" style="width:100%">
+                                        <option selected>--- SELECT ---</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="date" asp-for="UserPrinters[i].DateInstall" />
+                                </td>
+                                <td>
+                                    <input asp-for="UserPrinters[i].Period" style="width:100%" />
+                                </td>
+                                <td>
+                                    <input asp-for="UserPrinters[i].DepositAmt" type="number" />
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("input, textarea").prop("readonly", true);
+        $("select").prop("disabled", true);
+    });
+</script>
+

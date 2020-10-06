@@ -4,6 +4,7 @@ using GkMS_Test1.Users.Application.Models;
 using GkMS_Test1.Users.Domain.Commands;
 using GkMS_Test1.Users.Domain.Interfaces;
 using GkMS_Test1.Users.Domain.Models;
+using GkMS_Test1.Users.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -29,6 +30,26 @@ namespace GkMS_Test1.Users.Application.Services
         {
             var createPrinterCommand = new CreatePrinterCommand(userPrinter.UserId, userPrinter.PrinterId,userPrinter.IsAssigned);
             _eventBus.SendCommand(createPrinterCommand);
-        }        
+        }
+
+        public UserVM GetUser(int id)
+        {
+            return _userRepository.GetUser(id);
+        }
+
+        public void AddUser(UserVM user)
+        {
+            _userRepository.AddUser(user);
+        }
+
+        public void ModUser(int id, UserVM user)
+        {
+            _userRepository.ModifyUser(id, user);
+        }
+
+        public void DelUser(int id)
+        {
+            _userRepository.DeleteUser(id);
+        }
     }
 }

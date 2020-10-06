@@ -19,17 +19,26 @@ namespace GkMS_Test1.Printers.Api.Controllers
         {
             _printerService = printerService;
         }
-
+                
         [HttpGet]
         public ActionResult<IEnumerable<Printer>> Get()
         {
             return Ok(_printerService.GetPrinters());
         }
 
-        [HttpGet("{id}")]
+        //[Route("{id:int}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Printer> Get(int id)
         {
             return Ok(_printerService.GetPrinter(id));
+        }
+
+        //[Route("{name}")]
+        [HttpGet("{userid}")]
+        public ActionResult<Printer> GetUserDevices(string userid)
+        {
+            //return Ok();
+            return Ok(_printerService.GetUserPrinters(userid));
         }
 
         [HttpPut("{id}")]
@@ -44,5 +53,10 @@ namespace GkMS_Test1.Printers.Api.Controllers
             _printerService.DelPrinter(id);
         }
 
+        [HttpPost]
+        public void PostPrinter(Printer printer)
+        {
+            _printerService.AddPrinter(printer);
+        }
     }
 }
