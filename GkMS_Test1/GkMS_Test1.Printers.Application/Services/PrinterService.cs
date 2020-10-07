@@ -34,15 +34,5 @@ namespace GkMS_Test1.Printers.Application.Services
         {
             _printerRepository.DeletePrinter(id);
         }
-
-        public void AddPrinter(Printer printer)
-        {
-            _printerRepository.AddPrinter(printer);
-        }
-
-        public List<UserPrinter> GetUserPrinters(string userid)
-        {
-            return _printerRepository.GetUserPrinters(userid);
-        }
     }
 }

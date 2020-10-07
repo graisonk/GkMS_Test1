@@ -41,21 +41,16 @@ namespace GkMS_Test1.MVC.Controllers
         // POST: DeviceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Printer printer)
+        public ActionResult Create(IFormCollection collection)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    await _userPrinterService.AddPrinter(printer);
-                    return RedirectToAction(nameof(Index));
-                }
-                catch
-                {
-                    return View();
-                }
+                return RedirectToAction(nameof(Index));
             }
-            return View();
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: DeviceController/Edit/5

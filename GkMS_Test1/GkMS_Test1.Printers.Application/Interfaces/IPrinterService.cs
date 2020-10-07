@@ -9,10 +9,8 @@ namespace GkMS_Test1.Printers.Application.Interfaces
     {
         IEnumerable<Printer> GetPrinters();
         Printer GetPrinter(int id);
-        void AddPrinter(Printer printer);
+
         void ModPrinter(int id, Printer printer);
         void DelPrinter(int id);
-
-        List<UserPrinter> GetUserPrinters(string userid);
     }
 }

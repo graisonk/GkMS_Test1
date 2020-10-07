@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using GkMS_Test1.Users.Application.Interfaces;
 using GkMS_Test1.Users.Application.Models;
 using GkMS_Test1.Users.Domain.Models;
-using GkMS_Test1.Users.Domain.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,36 +28,11 @@ namespace GkMS_Test1.Users.Api.Controllers
             return Ok(_userService.GetUsers());
         }
 
-        // GET api/user/5
-        [HttpGet("{id}")]
-        public ActionResult<UserVM> Get(int id)
-        {
-            return Ok(_userService.GetUser(id));
-        }
-                
-        [HttpPut("{id}")]
-        public void PutUser(int id, UserVM user)
-        {
-            _userService.ModUser(id, user);
-        }
-
-        [HttpDelete("{id}")]
-        public void DeleteUser(int id)
-        {
-            _userService.DelUser(id);
-        }
-
         [HttpPost]
-        public void PostUser([FromBody] UserVM user)
+        public IActionResult Post([FromBody] UserPrinter userPrinter)
         {
-            _userService.AddUser(user);            
+            _userService.AssignPrinter(userPrinter);
+            return Ok(userPrinter);
         }
-
-        //[HttpPost]
-        //public IActionResult Post([FromBody] UserPrinter userPrinter)
-        //{
-        //    _userService.AssignPrinter(userPrinter);
-        //    return Ok(userPrinter);
-        //}
     }
 }
