@@ -103,9 +103,7 @@
 
                             <tr id=@Model.UserPrinters[i].Id>
                                 <td>
-                                    <select asp-for="UserPrinters[i].PrinterId" asp-items="ViewBag.List_Printers" style="width:100%">
-                                        <option selected>--- SELECT ---</option>
-                                    </select>
+                                    <input asp-for="UserPrinters[i].Printer.Name"  style="width:100%">                                                                            
                                 </td>
                                 <td>
                                     <input type="date" asp-for="UserPrinters[i].DateInstall" />

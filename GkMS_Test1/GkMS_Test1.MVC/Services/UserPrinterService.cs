@@ -105,10 +105,7 @@ namespace GkMS_Test1.MVC.Services
             //List<UserPrinter> devices = new List<UserPrinter>();
             string tmp = "userid=" + id;
             List<UserPrinter> devices = await GetUserDevices(tmp);
-            if (devices == null)
-            {
-                devices = new List<UserPrinter>();
-            }
+            
             UserProfileVM model = new UserProfileVM() { User = uservm.User, Personal = uservm.Personal, UserPrinters = devices };
             return model;
         }

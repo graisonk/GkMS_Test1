@@ -1,6 +1,7 @@
 ﻿using GkMS_Test1.Printers.Data.Context;
 using GkMS_Test1.Printers.Domain.Interfaces;
 using GkMS_Test1.Printers.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace GkMS_Test1.Printers.Data.Repository
             {
                 _context.Printers.Remove(printer);
                 _context.SaveChanges();
-            }            
+            }
         }
 
         public void AddPrinter(Printer printer)
@@ -58,14 +59,16 @@ namespace GkMS_Test1.Printers.Data.Repository
 
         public List<UserPrinter> GetUserPrinters(string userid)
         {
+            List<UserPrinter> printers = new List<UserPrinter>();
             string[] asd = { "" };
             asd = userid.Split('=');
             if (asd[1] != "")
             {
                 int tmpId = Convert.ToInt32(asd[1]);
-                return _context.UserPrinters.Where(p => p.UserId == tmpId).ToList();
+                printers = _context.UserPrinters.Include(p => p.Printer).Where(p => p.UserId == tmpId).ToList();                
             }
-            return null;
+
+            return printers;
         }
     }
 }

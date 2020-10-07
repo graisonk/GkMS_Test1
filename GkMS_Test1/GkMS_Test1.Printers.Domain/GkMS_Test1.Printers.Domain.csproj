@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GkMS_Test1.Domain.Core\GkMS_Test1.Domain.Core.csproj" />
+    <ProjectReference Include="..\GkMS_Test1.Users.Application\GkMS_Test1.Users.Application.csproj" />
   </ItemGroup>
 
 </Project>

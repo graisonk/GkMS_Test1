@@ -35,9 +35,8 @@ namespace GkMS_Test1.Printers.Api.Controllers
 
         //[Route("{name}")]
         [HttpGet("{userid}")]
-        public ActionResult<Printer> GetUserDevices(string userid)
+        public ActionResult<UserPrinter> GetUserDevices(string userid)
         {
-            //return Ok();
             return Ok(_printerService.GetUserPrinters(userid));
         }
 
