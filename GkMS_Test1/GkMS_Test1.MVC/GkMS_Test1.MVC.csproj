@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GkMS_Test1.Printers.Data\GkMS_Test1.Printers.Data.csproj" />
+    <ProjectReference Include="..\GkMS_Test1.Users.Data\GkMS_Test1.Users.Data.csproj" />
   </ItemGroup>
 
 </Project>
