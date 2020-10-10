@@ -19,6 +19,11 @@ using GkMS_Test1.Printers.Data.Context;
 using GkMS_Test1.Printers.Domain.Events;
 using GkMS_Test1.Printers.Domain.EventHandlers;
 using GkMS_Test1.Printers.Domain.Interfaces;
+using GkMS_Test1.Invoice.Application.Interfaces;
+using GkMS_Test1.Invoice.Application.Services;
+using GkMS_Test1.Invoice.Data.Repository;
+using GkMS_Test1.Invoice.Domain.Interfaces;
+using GkMS_Test1.Invoice.Data.Context;
 
 namespace GkMS_Test1.Infra.IoC
 {
@@ -48,12 +53,15 @@ namespace GkMS_Test1.Infra.IoC
             //Application Services
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IPrinterService, PrinterService>();
+            services.AddTransient<IInvoiceService, InvoiceService>();
 
             //Data
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPrinterRepository, PrinterRepository>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
             services.AddTransient<UserDbContext>();
             services.AddTransient<PrinterDbContext>();
+            services.AddTransient<InvoiceDbContext>();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using GkMS_Test1.MVC.Models;
+﻿
+
+using GkMS_Test1.MVC.Models;
 using GkMS_Test1.MVC.Models.DTO;
 using GkMS_Test1.Printers.Domain.Models;
 using GkMS_Test1.Printers.Domain.ViewModels;
@@ -23,12 +25,6 @@ namespace GkMS_Test1.MVC.Services
         Task AddPrinter(PrinterSlabVM printer);
         Task UpdPrinter(int id, PrinterSlabVM printer);
         Task DelPrinter(int id);
-
-        //Task<List<Invoices>> GetInvoices();
-        //Task<Invoices> GetInvoice(int id);
-        //Task AddInvoice(Invoices Invoice);
-        //Task UpdInvoice(int id, Invoices Invoice);
-        //Task DelInvoice(int id);
 
         Task LinkUserPrinter(UserPrinterDto userPrinterDto);
         Task UpdRefUsers(User userProfile);
