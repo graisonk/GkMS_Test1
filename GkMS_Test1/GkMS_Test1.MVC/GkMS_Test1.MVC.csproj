@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GkMS_Test1.Invoice.Data\GkMS_Test1.Invoice.Data.csproj" />
+    <ProjectReference Include="..\GkMS_Test1.Invoice.Domain\GkMS_Test1.Invoice.Domain.csproj" />
     <ProjectReference Include="..\GkMS_Test1.Printers.Data\GkMS_Test1.Printers.Data.csproj" />
     <ProjectReference Include="..\GkMS_Test1.Users.Data\GkMS_Test1.Users.Data.csproj" />
   </ItemGroup>

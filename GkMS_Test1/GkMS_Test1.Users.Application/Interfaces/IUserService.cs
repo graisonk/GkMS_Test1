@@ -14,6 +14,7 @@ namespace GkMS_Test1.Users.Application.Interfaces
         void AddUser(UserVM user);
         void ModUser(int id, UserVM user);
         void DelUser(int id);
-        void AssignPrinter(UserPrinter userPrinter);
+        void AssignPrinter(UPrinterDto userPrinter);
+        void UpdProfile(User profile);
     }
 }

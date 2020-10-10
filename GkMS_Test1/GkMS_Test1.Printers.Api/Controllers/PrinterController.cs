@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GkMS_Test1.Printers.Application.Interfaces;
 using GkMS_Test1.Printers.Domain.Models;
+using GkMS_Test1.Printers.Domain.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,7 @@ namespace GkMS_Test1.Printers.Api.Controllers
 
         //[Route("{id:int}")]
         [HttpGet("{id:int}")]
-        public ActionResult<Printer> Get(int id)
+        public ActionResult<PrinterSlabVM> Get(int id)
         {
             return Ok(_printerService.GetPrinter(id));
         }
@@ -41,7 +42,7 @@ namespace GkMS_Test1.Printers.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public void PutPrinter(int id, Printer printer)
+        public void PutPrinter(int id, PrinterSlabVM printer)
         {
             _printerService.ModPrinter(id, printer);            
         }
@@ -53,7 +54,7 @@ namespace GkMS_Test1.Printers.Api.Controllers
         }
 
         [HttpPost]
-        public void PostPrinter(Printer printer)
+        public void PostPrinter(PrinterSlabVM printer)
         {
             _printerService.AddPrinter(printer);
         }

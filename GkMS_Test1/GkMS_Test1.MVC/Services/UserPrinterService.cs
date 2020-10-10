@@ -1,6 +1,7 @@
 ﻿using GkMS_Test1.MVC.Models;
 using GkMS_Test1.MVC.Models.DTO;
 using GkMS_Test1.Printers.Domain.Models;
+using GkMS_Test1.Printers.Domain.ViewModels;
 using GkMS_Test1.Users.Domain.Models;
 using GkMS_Test1.Users.Domain.ViewModels;
 using Newtonsoft.Json;
@@ -21,20 +22,33 @@ namespace GkMS_Test1.MVC.Services
         {
             _apiCLient = apiCLient;
         }
+        public async Task LinkUserPrinter(UserPrinterDto userPrinterDto)
+        {
+            var uri = "https://localhost:5001/api/User/" + userPrinterDto.UserId;
+            var transferObj = new StringContent(JsonConvert.SerializeObject(userPrinterDto), System.Text.Encoding.UTF8, "application/json");
+            var response = await _apiCLient.PostAsync(uri, transferObj);
+            response.EnsureSuccessStatusCode();
+        }
+        public async Task UpdRefUsers(User userProfile)
+        {
+            var uri = "https://localhost:5001/api/User/" + "updEvt";
+            var transferObj = new StringContent(JsonConvert.SerializeObject(userProfile), System.Text.Encoding.UTF8, "application/json");
+            var response = await _apiCLient.PostAsync(uri, transferObj);
+            response.EnsureSuccessStatusCode();
+        }
 
-        public async Task<Printer> GetPrinter(int id)
+        public async Task<PrinterSlabVM> GetPrinter(int id)
         {
             var uri = "https://localhost:5003/api/Printer/" + id;
-            Printer printer = new Printer();
+            PrinterSlabVM printer = new PrinterSlabVM();
             HttpResponseMessage response = await _apiCLient.GetAsync(uri);
             if (response.IsSuccessStatusCode)
             {
                 var readTask = response.Content.ReadAsStringAsync().Result;
-                printer = JsonConvert.DeserializeObject<Printer>(readTask);
+                printer = JsonConvert.DeserializeObject<PrinterSlabVM>(readTask);
             }
             return printer;
         }
-
         public async Task<List<Printer>> GetPrinters()
         {
             var uri = "https://localhost:5003/api/Printer";
@@ -47,16 +61,7 @@ namespace GkMS_Test1.MVC.Services
             }
             return printerList;
         }
-
-        public async Task LinkUserPrinter(UserPrinterDto userPrinterDto)
-        {
-            var uri = "https://localhost:5001/api/User";
-            var transferObj = new StringContent(JsonConvert.SerializeObject(userPrinterDto), System.Text.Encoding.UTF8, "application/json");
-            var response = await _apiCLient.PostAsync(uri, transferObj);
-            response.EnsureSuccessStatusCode();
-        }
-
-        public async Task UpdPrinter(int id, Printer printer)
+        public async Task UpdPrinter(int id, PrinterSlabVM printer)
         {
             var uri = "https://localhost:5003/api/Printer/" + id;
             var transferObj = new StringContent(JsonConvert.SerializeObject(printer), System.Text.Encoding.UTF8, "application/json");
@@ -70,7 +75,7 @@ namespace GkMS_Test1.MVC.Services
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task AddPrinter(Printer printer)
+        public async Task AddPrinter(PrinterSlabVM printer)
         {
             var uri = "https://localhost:5003/api/Printer";
             var transferObj = new StringContent(JsonConvert.SerializeObject(printer), System.Text.Encoding.UTF8, "application/json");
@@ -146,6 +151,6 @@ namespace GkMS_Test1.MVC.Services
                 userDevices = JsonConvert.DeserializeObject<List<UserPrinter>>(readTask);
             }
             return userDevices;
-        }
+        }        
     }
 }

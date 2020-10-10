@@ -75,6 +75,8 @@ namespace GkMS_Test1.MVC.Controllers
                 try
                 {
                     await _userPrinterService.UpdUser(id, model);
+                    User user = model.User;
+                    await _userPrinterService.UpdRefUsers(user);
                     return RedirectToAction(nameof(Index));
                 }
                 catch

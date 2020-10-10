@@ -1,6 +1,7 @@
 ﻿using GkMS_Test1.Printers.Data.Context;
 using GkMS_Test1.Printers.Domain.Interfaces;
 using GkMS_Test1.Printers.Domain.Models;
+using GkMS_Test1.Printers.Domain.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,26 +18,59 @@ namespace GkMS_Test1.Printers.Data.Repository
         {
             _context = context;
         }
-
-        public Printer GetPrinter(int id)
+        public void Add(UserPrinter userPrinter)
         {
-            return _context.Printers.Find(id);
+            _context.UserPrinters.Add(userPrinter);
+            _context.SaveChanges();
+        }
+        public void UpdateRefUser(Ref_User ref_User)
+        {
+            Ref_User user = _context.Ref_Users.Where(i => i.RefDbId == ref_User.Id).FirstOrDefault();
+            if (user != null)
+            {
+                user.Name = ref_User.Name;
+                _context.Ref_Users.Update(user);
+                _context.SaveChanges();
+            }
+        }
+
+        public PrinterSlabVM GetPrinter(int id)
+        {
+            PrinterSlabVM model = new PrinterSlabVM()
+            {
+                Printer = _context.Printers.Find(id),
+                PrinterRates = _context.PrinterRates.Where(p => p.PrinterId == id).ToList()
+            };
+            return model;
         }
 
         public IEnumerable<Printer> GetPrinters()
         {
             return _context.Printers;
         }
-        public void Add(UserPrinter userPrinter)
+        public void ModifyPrinter(int id, PrinterSlabVM printer)
         {
-            _context.UserPrinters.Add(userPrinter);
-            _context.SaveChanges();
-        }
-        public void ModifyPrinter(int id, Printer printer)
-        {
-            if (id == printer.Id)
+            if (id == printer.Printer.Id)
             {
-                _context.Printers.Update(printer);
+                _context.Printers.Update(printer.Printer);
+
+                int max = 0;
+                if (printer.PrinterRates != null)
+                {
+                    max = printer.PrinterRates.Count;                    
+                    for (int i = 0; i < max; i++)
+                    {
+                        if (printer.PrinterRates[i].Id == 0)
+                        {                            
+                            printer.PrinterRates[i].PrinterId = printer.Printer.Id;
+                            _context.PrinterRates.Add(printer.PrinterRates[i]);
+                        }
+                        else
+                        {
+                            _context.PrinterRates.Update(printer.PrinterRates[i]);
+                        }
+                    }
+                }
                 _context.SaveChanges();
             }
         }
@@ -51,9 +85,21 @@ namespace GkMS_Test1.Printers.Data.Repository
             }
         }
 
-        public void AddPrinter(Printer printer)
+        public void AddPrinter(PrinterSlabVM printer)
         {
-            _context.Printers.Add(printer);
+            _context.Printers.Add(printer.Printer);
+            _context.SaveChanges();
+
+            var count = 0;
+            if (printer.PrinterRates != null)
+                count = printer.PrinterRates.Count;
+
+            for (int i = 0; i < count; i++)
+            {
+                printer.PrinterRates[i].PrinterId = printer.Printer.Id; 
+                _context.PrinterRates.Add(printer.PrinterRates[i]);
+            }
+
             _context.SaveChanges();
         }
 
@@ -65,7 +111,7 @@ namespace GkMS_Test1.Printers.Data.Repository
             if (asd[1] != "")
             {
                 int tmpId = Convert.ToInt32(asd[1]);
-                printers = _context.UserPrinters.Include(p => p.Printer).Where(p => p.UserId == tmpId).ToList();                
+                printers = _context.UserPrinters.Include(p => p.Printer).Where(p => p.UserId == tmpId).ToList();
             }
 
             return printers;

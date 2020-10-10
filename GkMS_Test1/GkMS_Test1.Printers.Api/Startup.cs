@@ -92,6 +92,7 @@ namespace GkMS_Test1.Printers.Api
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
             eventBus.Subscribe<PrinterEvent, PrinterEventHandler>();
+            eventBus.Subscribe<UserEvent, UserEventHandler>();
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GkMS_Test1.MVC.Services;
 using GkMS_Test1.Printers.Domain.Models;
+using GkMS_Test1.Printers.Domain.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,7 @@ namespace GkMS_Test1.MVC.Controllers
         // GET: DeviceController/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            Printer printer = await _userPrinterService.GetPrinter(id);
+            PrinterSlabVM printer = await _userPrinterService.GetPrinter(id);
             return View(printer);
         }
 
@@ -41,13 +42,13 @@ namespace GkMS_Test1.MVC.Controllers
         // POST: DeviceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Printer printer)
+        public async Task<IActionResult> Create(PrinterSlabVM model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _userPrinterService.AddPrinter(printer);
+                    await _userPrinterService.AddPrinter(model);
                     return RedirectToAction(nameof(Index));
                 }
                 catch
@@ -61,7 +62,7 @@ namespace GkMS_Test1.MVC.Controllers
         // GET: DeviceController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            Printer printer = await _userPrinterService.GetPrinter(id);
+            PrinterSlabVM printer = await _userPrinterService.GetPrinter(id);
             return View(printer);
         }
 
@@ -69,13 +70,13 @@ namespace GkMS_Test1.MVC.Controllers
         //[HttpPut("{id}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Printer printer)
+        public async Task<IActionResult> Edit(int id, PrinterSlabVM model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _userPrinterService.UpdPrinter(id, printer);
+                    await _userPrinterService.UpdPrinter(id, model);
                     return RedirectToAction(nameof(Index));
                 }
                 catch
@@ -83,7 +84,7 @@ namespace GkMS_Test1.MVC.Controllers
                     return View();
                 }
             }
-            return View(printer);
+            return View(model);
         }
                 
         // POST: DeviceController/Delete/5

@@ -9,10 +9,12 @@ namespace GkMS_Test1.Printers.Domain.Models
     public class UserPrinter
     {
         public int Id { get; set; }
-        public int UserId { get; set; }        
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual Ref_User Ref_User { get; set; }
         public int PrinterId { get; set; }
         [ForeignKey("PrinterId")]
-        public virtual Printer Printer { get; set; }
+        public virtual Printer Printer { get; set; }        
 
         [Display(Name = "Installation Date"), DataType(DataType.Date)]
         public DateTime DateInstall { get; set; }

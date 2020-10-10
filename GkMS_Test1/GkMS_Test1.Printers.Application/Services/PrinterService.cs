@@ -1,6 +1,7 @@
 ﻿using GkMS_Test1.Printers.Application.Interfaces;
 using GkMS_Test1.Printers.Domain.Interfaces;
 using GkMS_Test1.Printers.Domain.Models;
+using GkMS_Test1.Printers.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +17,7 @@ namespace GkMS_Test1.Printers.Application.Services
             _printerRepository = printerRepository;
         }        
 
-        public Printer GetPrinter(int id)
+        public PrinterSlabVM GetPrinter(int id)
         {
             return _printerRepository.GetPrinter(id);
         }
@@ -26,7 +27,7 @@ namespace GkMS_Test1.Printers.Application.Services
             return _printerRepository.GetPrinters();
         }
 
-        public void ModPrinter(int id, Printer printer)
+        public void ModPrinter(int id, PrinterSlabVM printer)
         {
             _printerRepository.ModifyPrinter(id, printer);
         }
@@ -35,7 +36,7 @@ namespace GkMS_Test1.Printers.Application.Services
             _printerRepository.DeletePrinter(id);
         }
 
-        public void AddPrinter(Printer printer)
+        public void AddPrinter(PrinterSlabVM printer)
         {
             _printerRepository.AddPrinter(printer);
         }

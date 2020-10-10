@@ -35,12 +35,15 @@ namespace GkMS_Test1.Infra.IoC
 
             //Subscriptions
             services.AddTransient<PrinterEventHandler>();
-            
+            services.AddTransient<UserEventHandler>();
+
             //Domain Events
             services.AddTransient<IEventHandler<PrinterEvent>, PrinterEventHandler>();
+            services.AddTransient<IEventHandler<UserEvent>, UserEventHandler>();
 
             //Domain Commands
             services.AddTransient<IRequestHandler<CreatePrinterCommand, bool>, PrinterCommandHandler>();
+            services.AddTransient<IRequestHandler<UpdateUserCommand, bool>, UserCommandHandler>();
 
             //Application Services
             services.AddTransient<IUserService, UserService>();

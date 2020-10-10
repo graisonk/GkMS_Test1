@@ -21,17 +21,21 @@ namespace GkMS_Test1.Users.Application.Services
             _userRepository = userRepository;
             _eventBus = eventBus;
         }
+
+        public void AssignPrinter(UPrinterDto userPrinter)
+        {
+            var createPrinterCommand = new CreatePrinterCommand(userPrinter.UserId, userPrinter.PrinterId, userPrinter.IsAssigned);
+            _eventBus.SendCommand(createPrinterCommand);
+        }
+        public void UpdProfile(User profile)
+        {
+            var updateUserCommand = new UpdateUserCommand(profile.Id, profile.Name);
+            _eventBus.SendCommand(updateUserCommand);
+        }
         public IEnumerable<User> GetUsers()
         {
             return _userRepository.GetUsers();
-        }
-
-        public void AssignPrinter(UserPrinter userPrinter)
-        {
-            var createPrinterCommand = new CreatePrinterCommand(userPrinter.UserId, userPrinter.PrinterId,userPrinter.IsAssigned);
-            _eventBus.SendCommand(createPrinterCommand);
-        }
-
+        }        
         public UserVM GetUser(int id)
         {
             return _userRepository.GetUser(id);
@@ -50,6 +54,6 @@ namespace GkMS_Test1.Users.Application.Services
         public void DelUser(int id)
         {
             _userRepository.DeleteUser(id);
-        }
+        }        
     }
 }

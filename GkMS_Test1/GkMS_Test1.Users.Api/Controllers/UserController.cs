@@ -35,7 +35,7 @@ namespace GkMS_Test1.Users.Api.Controllers
         {
             return Ok(_userService.GetUser(id));
         }
-                
+
         [HttpPut("{id}")]
         public void PutUser(int id, UserVM user)
         {
@@ -51,14 +51,21 @@ namespace GkMS_Test1.Users.Api.Controllers
         [HttpPost]
         public void PostUser([FromBody] UserVM user)
         {
-            _userService.AddUser(user);            
+            _userService.AddUser(user);
         }
 
-        //[HttpPost]
-        //public IActionResult Post([FromBody] UserPrinter userPrinter)
-        //{
-        //    _userService.AssignPrinter(userPrinter);
-        //    return Ok(userPrinter);
-        //}
+        [HttpPost("{id:int}")]
+        public IActionResult Post(int id, [FromBody] UPrinterDto uPrinterDto)
+        {
+            _userService.AssignPrinter(uPrinterDto);
+            return Ok(uPrinterDto);
+        }
+        
+        [HttpPost("{uname}")]
+        public IActionResult UpdateProfile(string uname, [FromBody] User profile)
+        {
+            _userService.UpdProfile(profile);
+            return Ok(profile);
+        }
     }
 }

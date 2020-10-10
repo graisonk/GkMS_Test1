@@ -50,6 +50,61 @@ namespace GkMS_Test1.Printers.Data.Migrations
                     b.ToTable("Printers");
                 });
 
+            modelBuilder.Entity("GkMS_Test1.Printers.Domain.Models.PrinterRates", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PrinterId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValFrom")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValTo")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrinterId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("PrinterRates");
+                });
+
+            modelBuilder.Entity("GkMS_Test1.Printers.Domain.Models.Ref_User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GstNo")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("Varchar(30)");
+
+                    b.Property<string>("PanNo")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<int>("RefDbId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ref_Users");
+                });
+
             modelBuilder.Entity("GkMS_Test1.Printers.Domain.Models.UserPrinter", b =>
                 {
                     b.Property<int>("Id")
@@ -79,7 +134,22 @@ namespace GkMS_Test1.Printers.Data.Migrations
 
                     b.HasIndex("PrinterId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("UserPrinters");
+                });
+
+            modelBuilder.Entity("GkMS_Test1.Printers.Domain.Models.PrinterRates", b =>
+                {
+                    b.HasOne("GkMS_Test1.Printers.Domain.Models.Printer", "Printer")
+                        .WithMany()
+                        .HasForeignKey("PrinterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GkMS_Test1.Printers.Domain.Models.Ref_User", "Ref_User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("GkMS_Test1.Printers.Domain.Models.UserPrinter", b =>
@@ -87,6 +157,12 @@ namespace GkMS_Test1.Printers.Data.Migrations
                     b.HasOne("GkMS_Test1.Printers.Domain.Models.Printer", "Printer")
                         .WithMany()
                         .HasForeignKey("PrinterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GkMS_Test1.Printers.Domain.Models.Ref_User", "Ref_User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

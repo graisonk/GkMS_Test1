@@ -1,7 +1,45 @@
-﻿@model GkMS_Test1.Printers.Domain.Models.Printer
+﻿@model GkMS_Test1.Printers.Domain.ViewModels.PrinterSlabVM
 @{
     ViewData["Title"] = "Edit";
 }
+
+<script>
+    $(document).ready(function () {
+        $(".add-row").click(function () {
+            //debugger;
+            var j = $("#tblData tr").length - 1;
+            var r = j + 1;
+            j = j.toString();
+            var markup = "<tr>" +
+                "<td>" +
+                "<input id='PrinterRates_" + j + "__ValFrom' name='PrinterRates[" + j + "].ValFrom' type='number' />" +
+                "</td>" +
+                "<td>" +
+                "<input id='PrinterRates_" + j + "__ValTo' name='PrinterRates[" + j + "].ValTo' type='number'/>" +
+                "</td>" +
+                "<td>" +
+                "<input id='PrinterRates_" + j + "__Rate' name='PrinterRates[" + j + "].Rate' type='number' />" +
+                "</td>" +
+                "</tr>";
+            $("table tbody").append(markup);
+            //console.log(markup);
+        });
+
+        // Find and remove selected table rows
+        var cnt = '';
+        $(".delete-row").click(function () {
+            var tmpId = $("#tblData tr:last").attr("id");
+            if ($.isNumeric(tmpId) && tmpId > 0) {
+                if (cnt == '')
+                    cnt = tmpId;
+                else
+                    cnt = cnt + ',' + tmpId;
+            }
+            $("#tblData tr:last").remove();
+            $('#Del_Str').val(cnt);
+        });
+    });
+</script>
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -19,46 +57,86 @@
     </div>
 
     <hr />
-    <input type="hidden" asp-for="Id"/>
+    <input type="hidden" asp-for="Printer.Id"/>
 
     <div class="row">
         <div class="row col-md-6">
             <div class="row col-md-12 form-group required">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Printer.Name" class="control-label"></label>
+                <input asp-for="Printer.Name" class="form-control" />
+                <span asp-validation-for="Printer.Name" class="text-danger"></span>
             </div>
 
             <div class="row col-md-12 form-group">
-                <label asp-for="Serial" class="control-label"></label>
-                <input asp-for="Serial" class="form-control" />
-                <span asp-validation-for="Serial" class="text-danger"></span>
+                <label asp-for="Printer.Serial" class="control-label"></label>
+                <input asp-for="Printer.Serial" class="form-control" />
+                <span asp-validation-for="Printer.Serial" class="text-danger"></span>
             </div>
 
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label asp-for="Hsn" class="control-label"></label>
-                        <input asp-for="Hsn" class="form-control" />
-                        <span asp-validation-for="Hsn" class="text-danger"></span>
+                        <label asp-for="Printer.Hsn" class="control-label"></label>
+                        <input asp-for="Printer.Hsn" class="form-control" />
+                        <span asp-validation-for="Printer.Hsn" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group required">
-                        <label asp-for="Cgst" class="control-label"></label>
-                        <input asp-for="Cgst" class="form-control clCgst" type="number" />
-                        <span asp-validation-for="Cgst" class="text-danger"></span>
+                        <label asp-for="Printer.Cgst" class="control-label"></label>
+                        <input asp-for="Printer.Cgst" class="form-control clCgst" type="number" />
+                        <span asp-validation-for="Printer.Cgst" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group required">
-                        <label asp-for="Sgst" class="control-label"></label>
-                        <input asp-for="Sgst" class="form-control clSgst" type="number" />
-                        <span asp-validation-for="Sgst" class="text-danger"></span>
+                        <label asp-for="Printer.Sgst" class="control-label"></label>
+                        <input asp-for="Printer.Sgst" class="form-control clSgst" type="number" />
+                        <span asp-validation-for="Printer.Sgst" class="text-danger"></span>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="row col-md-6">
+            <div style="margin-left:100px ; margin-top:25px">
+                <label class="control-label">Rate Slabs</label>
+                <input type="button" class="add-row" value="+">
+                <button type="button" class="delete-row">-</button>
+                <table id="tblData" border="1" title="Rate Slabs">
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            for (int i = 0; i < Model.PrinterRates.Count; i++)
+                            {
+                                int j = i + 1;
+                                <tr id=@Model.PrinterRates[i].Id>
+                                    <td>
+                                        <input asp-for="PrinterRates[i].ValFrom" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="PrinterRates[i].ValTo" />
+                                    </td>
+                                    <td>
+                                        <input asp-for="PrinterRates[i].Rate" type="number" />
+
+                                        <input type="hidden" asp-for="PrinterRates[i].Id" />
+                                        <input type="hidden" asp-for="PrinterRates[i].PrinterId" />
+                                        <input type="hidden" asp-for="PrinterRates[i].UserId" />                                        
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

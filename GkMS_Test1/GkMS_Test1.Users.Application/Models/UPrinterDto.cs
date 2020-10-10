@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GkMS_Test1.Users.Application.Models
 {
-    public class UserPrinter
+    public class UPrinterDto
     {
         public int UserId { get; set; }
         public int PrinterId { get; set; }
