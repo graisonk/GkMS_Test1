@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GkMS_Test1.Invoice.Domain.Models;
 using GkMS_Test1.MVC.Models;
 using GkMS_Test1.MVC.Services;
 using GkMS_Test1.Users.Domain.Models;
@@ -46,7 +47,7 @@ namespace GkMS_Test1.MVC.Controllers
             if (ModelState.IsValid)
             {
                 try
-                {                    
+                {
                     await _userPrinterService.AddUser(model);
                     return RedirectToAction(nameof(Index));
                 }
@@ -101,6 +102,6 @@ namespace GkMS_Test1.MVC.Controllers
             {
                 return View();
             }
-        }
+        }        
     }
 }

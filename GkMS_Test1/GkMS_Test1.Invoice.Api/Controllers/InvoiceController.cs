@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GkMS_Test1.Invoice.Application.Interfaces;
 using GkMS_Test1.Invoice.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,10 +29,20 @@ namespace GkMS_Test1.Invoice.Api.Controllers
         }
 
         // GET api/<InvoiceController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Invoices> Get(int id)
         {
             return Ok(_invoiceService.GetInvoice(id));
+        }
+
+        [HttpGet("{pattern}")]
+        public ActionResult<List<Ref_PrinterRates>> Get(string pattern)
+        {
+            string[] asd = { "" };
+            asd = pattern.Split('|');
+            int uid = Convert.ToInt32(asd[0]);
+            int pid = Convert.ToInt32(asd[1]);
+            return Ok(_invoiceService.PrinterRates(uid, pid));
         }
 
         // POST api/<InvoiceController>

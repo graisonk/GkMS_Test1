@@ -31,8 +31,8 @@ namespace GkMS_Test1.Users.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<UserDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("UserContext")));
-            //services.AddControllers();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddControllers();
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSwaggerGen(c =>
             {

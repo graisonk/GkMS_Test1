@@ -1,0 +1,111 @@
+﻿@model GkMS_Test1.Invoice.Domain.Models.Invoices
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <h4 class="col-md-4">Create - New MPS Invoice</h4>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="form-group" style="float:right">
+                <a asp-action="Index">Back to List</a>
+                <span> | </span>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
+    <hr />
+        
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label asp-for="InvNo" class="control-label"></label>
+            <input asp-for="InvNo" class="form-control" value="@ViewBag.InvoiceNo" readonly style="width:120px" />
+            <span asp-validation-for="InvNo" class="text-danger"></span>
+        </div>        
+    </div>
+
+    <div class="row">       
+        <div class="col-md-6">
+            <div class="form-group required">
+                <label asp-for="UserId" class="control-label">Customer</label>                
+                <input asp-for="UserId" class="form-control" />
+                <span  asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group col-md-6 required">
+            <label asp-for="PrinterId" class="control-label"></label>
+            <input asp-for="PrinterId" class="form-control slab" />
+            <span asp-validation-for="PrinterId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">       
+        <div class="col-md-3">
+            <label id="lblSlab" class="control-label">Rate Slabs</label>
+            <table id="tblSlab" border="1" title="Slab Rate">
+                @* style="display:none">*@
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        @*for (int i = 0; i < 2; i++)
+                        {
+                            <tr>
+                                <td><input asp-for="Slab_Rates[i].ValFrom" placeholder="From" style="width:90px" readonly /></td>
+                                <td><input asp-for="Slab_Rates[i].ValTo" placeholder="To" style="width:90px" readonly /></td>
+                                <td><input asp-for="Slab_Rates[i].Rate" placeholder="Rate" style="width:50px" readonly /></td>
+                            </tr>
+                        }*@
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-3">
+            <div class="row">
+                <div class="form-group col-md-6 required">
+                    <label asp-for="ReadingPrev" class="control-label">Previous</label>
+                    <a id="linkInv" href="#" class="badge badge-info" style="display:none">i</a>
+                    <input asp-for="ReadingPrev" class="form-control" style="width:100px" />
+                    <span asp-validation-for="ReadingPrev" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 required">
+                    <label asp-for="ReadingCurr" class="control-label">Curr. Reading</label>
+                    <input asp-for="ReadingCurr" class="form-control calc" style="width:100px" />
+                    <span asp-validation-for="ReadingCurr" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label id="lblUsuage" style="font-weight:bold; margin-left:70px">Usage: 0 Pages</label>
+            </div>
+        </div>
+
+    </div>
+    
+    <hr />
+
+    <div class="row">        
+        <div class="form-group col-md-3">
+            <label asp-for="AmtTotal" class="control-label"></label>
+            <input id="AmtTotal" asp-for="AmtTotal" class="form-control" readonly type="number" style="font-weight:bold" />
+            <span asp-validation-for="AmtTotal" class="text-danger"></span>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

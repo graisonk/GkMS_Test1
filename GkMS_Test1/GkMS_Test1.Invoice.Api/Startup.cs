@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GkMS_Test1.Domain.Core.Bus;
 using GkMS_Test1.Infra.IoC;
 using GkMS_Test1.Invoice.Data.Context;
+using GkMS_Test1.Invoice.Domain.EventHandlers;
+using GkMS_Test1.Invoice.Domain.Events;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -70,6 +73,13 @@ namespace GkMS_Test1.Invoice.Api
             {
                 endpoints.MapControllers();
             });
+
+            ConfigureEventBus(app);
+        }
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<RateChangeEvent, RateChangeEventHandler>();            
         }
     }
 }

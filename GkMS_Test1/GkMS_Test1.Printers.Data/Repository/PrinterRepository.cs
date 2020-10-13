@@ -111,6 +111,7 @@ namespace GkMS_Test1.Printers.Data.Repository
             if (asd[1] != "")
             {
                 int tmpId = Convert.ToInt32(asd[1]);
+                tmpId = _context.Ref_Users.Single(i => i.RefDbId == tmpId).Id;
                 printers = _context.UserPrinters.Include(p => p.Printer).Where(p => p.UserId == tmpId).ToList();
             }
 

@@ -1,0 +1,63 @@
+﻿
+@model IEnumerable<GkMS_Test1.Invoice.Domain.Models.Invoices>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row" style="border-bottom:groove">
+    <h4 class="col-md-4">Index - MPS Invoices</h4>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div style="float:right">
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+</div>
+
+<table id="dt_Index" class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InvNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Printer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AmtTotal)
+            </th>            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var tmpPrinter = item.Ref_Printer.Name;
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ref_User.Name)
+                </td>
+                <td>
+                    @tmpPrinter
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AmtTotal)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <span> | </span>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -39,5 +39,15 @@ namespace GkMS_Test1.Invoice.Application.Services
         {
             _invoiceRepository.ModifyInvoice(id, Inv);
         }
+
+        public List<Ref_PrinterRates> PrinterRates(int userId, int ptrId)
+        {
+            return _invoiceRepository.PrinterRates(userId, ptrId);
+        }
+
+        public List<Ref_User> UserSearch(string pattern)
+        {
+            return _invoiceRepository.GetUsers(pattern);
+        }
     }
 }

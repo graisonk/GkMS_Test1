@@ -1,0 +1,188 @@
+﻿
+@model GkMS_Test1.Invoice.Domain.Models.Invoices
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<link href="~/css/Invoice.css" rel="stylesheet" />
+
+<script async>
+    $(document).ready(function () {
+        $("input, textarea").prop("readonly", true);
+        $("select").prop("disabled", true);
+
+        $('.modalSp').modal('hide');
+    });
+
+    function submitForm() {
+        $('#InvConfirm').hide();
+        $('#DelPrompt').show();
+
+        return true;
+    }
+
+    function PopConfirm(isTrue) {
+        if (isTrue) {
+            $(".alert").alert('close')
+            $('#InvConfirm').show();
+            $('#DelPrompt').hide();
+        }
+        else {
+            $("#InvConfirm").hide();
+            $("#DelPrompt").show();
+        }
+    }
+
+    function modal() {
+        $('.modalSp').modal('show');
+        //setTimeout(function () {
+        //    $('.modalSp').modal('hide');
+        //}, 15000);
+    }
+</script>
+
+<style type="text/css">
+    .bd-example-modal-lg .modal-dialog {
+        display: table;
+        position: relative;
+        margin: 0 auto;
+        top: calc(50% - 24px);
+    }
+
+        .bd-example-modal-lg .modal-dialog .modal-content {
+            background-color: transparent;
+            border: none;
+        }
+</style>
+
+<div class="row">
+    <h4 class="col-md-2">MPS Invoice</h4>
+    <div class="col-md-5">
+        @if (TempData["Err"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["Err"]
+            </div>
+        }
+        else if (TempData["Msg"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["Msg"]
+            </div>
+        }
+
+        <div id="DelConfirm" style="display: none" class="form-group">
+            <span style="font-style:italic;font-weight:bold;margin:6px 0;float:left;">Do you really want to Delete ? </span>
+            <form asp-action="Delete" asp-route-id=@Model.Id>
+                <input type="submit" value="Yes" class="btn btn-danger" style="margin: -2px 9px" />
+                <a href="#" class="btn btn-primary" onclick="DelProfile(false)">No</a>
+            </form>
+        </div>
+
+        <div id="InvConfirm" style="display: none" class="form-group">
+            <span style="font-style:italic;font-weight:bold;margin:6px 0;float:left;">Generate Final Invoice ? </span>
+            <form onsubmit="return submitForm();">
+                <button type="submit" formaction="/Invoices/InvoiceMail/@Model.Id" class="btn btn-success btn-sm" onclick="modal();">Yes & Send Mail</button>
+                <button type="submit" formaction="/Invoices/InvoiceFinalize/@Model.Id" class="btn btn-danger btn-sm" style="margin: -2px 9px">Yes</button>
+                <a href="#" class="btn btn-primary btn-sm" onclick="PopConfirm(false)">No</a>
+            </form>
+        </div>
+
+        <div id="CancelConfirm" style="display: none" class="form-group">
+            <span style="font-style:italic;font-weight:bold;margin:6px 0;float:left;">Cancel Invoice No.@Model.InvNo ? </span>
+            <form asp-action="Cancel" asp-route-id=@Model.Id>
+                <input type="submit" value="Yes" class="btn btn-danger" style="margin: -2px 9px" />
+                <a href="#" class="btn btn-primary" onclick="PopCancel(false)">No</a>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div id="DelPrompt" class="form-group" style="float:right">
+            <a asp-action="Index">Back to List</a>
+            <span> | </span>
+            <a asp-action="Edit" asp-route-id=@Model.Id class="btn btn-primary">Edit</a>
+            <span> | </span>
+            <a href="#" class="btn btn-danger" onclick="DelProfile(true)">Delete</a>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="form-group col-md-2">
+        <label asp-for="InvNo" class="control-label"></label>
+        <input asp-for="InvNo" class="form-control" style="width:120px" />
+        <span asp-validation-for="InvNo" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        @{var tmpLink = "/Customer/Details/" + @Model.Id; }
+        <a href="@tmpLink">@Model.Ref_User.Name</a>
+    </div>
+
+    <div class="form-group col-md-6">
+        @{tmpLink = "/Printer/Details/" + @Model.Id; }
+        <a href="@tmpLink">@Model.Ref_Printer.Name | @Model.Ref_Printer.Serial</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label class="control-label">Rate Slabs</label>
+        <table id="tblSlab" border="1" title="Slab Rate">
+            @* style="display:none">*@
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    @*for (int i = 0; i < Model.Slab_Rates.Count; i++)
+                        {
+                            <tr id=@Model.Slab_Rates[i].Id>
+                                <td><input asp-for="Slab_Rates[i].ValFrom" placeholder="From" style="width:90px" readonly /></td>
+                                <td><input asp-for="Slab_Rates[i].ValTo" placeholder="To" style="width:90px" readonly /></td>
+                                <td><input asp-for="Slab_Rates[i].Rate" placeholder="Rate" style="width:50px" readonly /></td>
+                            </tr>
+                        }*@
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-3">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="ReadingPrev" class="control-label"></label>
+                <input asp-for="ReadingPrev" class="form-control" readonly style="width:100px" />
+                <span asp-validation-for="ReadingPrev" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="ReadingCurr" class="control-label"></label>
+                <input asp-for="ReadingCurr" class="form-control calc" style="width:100px" />
+                <span asp-validation-for="ReadingCurr" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="row form-group">
+            <label id="lblUsuage" style="font-weight:bold; margin-left:70px">Usage: @Model.curr_usuage Pages</label>
+        </div>*@
+    </div>
+
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="form-group col-md-3">
+        <label asp-for="AmtTotal" class="control-label"></label>
+        <input id="AmtTotal" asp-for="AmtTotal" class="form-control" readonly type="number" style="font-weight:bold" />
+        <span asp-validation-for="AmtTotal" class="text-danger"></span>
+    </div>
+</div>

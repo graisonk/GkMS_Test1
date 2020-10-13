@@ -24,6 +24,11 @@ using GkMS_Test1.Invoice.Application.Services;
 using GkMS_Test1.Invoice.Data.Repository;
 using GkMS_Test1.Invoice.Domain.Interfaces;
 using GkMS_Test1.Invoice.Data.Context;
+using GkMS_Test1.Invoice.Domain.EventHandlers;
+using GkMS_Test1.Invoice.Domain.Events;
+using RateChangeEvent = GkMS_Test1.Invoice.Domain.Events.RateChangeEvent;
+using GkMS_Test1.Printers.Domain.Commands;
+using GkMS_Test1.Printers.Domain.CommandHandlers;
 
 namespace GkMS_Test1.Infra.IoC
 {
@@ -41,14 +46,17 @@ namespace GkMS_Test1.Infra.IoC
             //Subscriptions
             services.AddTransient<PrinterEventHandler>();
             services.AddTransient<UserEventHandler>();
+            services.AddTransient<RateChangeEventHandler>();
 
             //Domain Events
             services.AddTransient<IEventHandler<PrinterEvent>, PrinterEventHandler>();
             services.AddTransient<IEventHandler<UserEvent>, UserEventHandler>();
+            services.AddTransient<IEventHandler<RateChangeEvent>, RateChangeEventHandler>();
 
             //Domain Commands
             services.AddTransient<IRequestHandler<CreatePrinterCommand, bool>, PrinterCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateUserCommand, bool>, UserCommandHandler>();
+            services.AddTransient<IRequestHandler<UpdateRateCommand, bool>, UpdateRateCommandHandler>();
 
             //Application Services
             services.AddTransient<IUserService, UserService>();

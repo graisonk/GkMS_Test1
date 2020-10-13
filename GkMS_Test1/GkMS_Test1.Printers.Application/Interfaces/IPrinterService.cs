@@ -15,5 +15,6 @@ namespace GkMS_Test1.Printers.Application.Interfaces
         void DelPrinter(int id);
 
         List<UserPrinter> GetUserPrinters(string userid);
+        void UpdateRefRates(PrinterRates rates);
     }
 }

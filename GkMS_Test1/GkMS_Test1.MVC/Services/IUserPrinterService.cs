@@ -1,5 +1,5 @@
 ﻿
-
+using GkMS_Test1.Invoice.Domain.Models;
 using GkMS_Test1.MVC.Models;
 using GkMS_Test1.MVC.Models.DTO;
 using GkMS_Test1.Printers.Domain.Models;
@@ -26,8 +26,16 @@ namespace GkMS_Test1.MVC.Services
         Task UpdPrinter(int id, PrinterSlabVM printer);
         Task DelPrinter(int id);
 
+        Task<List<Invoices>> GetInvoices();
+        Task<Invoices> GetInvoice(int id);
+        Task AddInvoice(Invoices Inv);
+        Task UpdInvoice(int id, Invoices Inv);
+        Task DelInvoice(int id);
+
         Task LinkUserPrinter(UserPrinterDto userPrinterDto);
         Task UpdRefUsers(User userProfile);
+        Task UpdRefRates(PrinterRates printerRates);
         Task<List<UserPrinter>> GetUserDevices(string userid);
+        Task<List<Ref_PrinterRates>> GetRates(string pattern);
     }
 }

@@ -1,4 +1,6 @@
-﻿using GkMS_Test1.Printers.Application.Interfaces;
+﻿using GkMS_Test1.Domain.Core.Bus;
+using GkMS_Test1.Printers.Application.Interfaces;
+using GkMS_Test1.Printers.Domain.Commands;
 using GkMS_Test1.Printers.Domain.Interfaces;
 using GkMS_Test1.Printers.Domain.Models;
 using GkMS_Test1.Printers.Domain.ViewModels;
@@ -11,11 +13,19 @@ namespace GkMS_Test1.Printers.Application.Services
     public class PrinterService : IPrinterService
     {
         private readonly IPrinterRepository _printerRepository;
+        private readonly IEventBus _eventBus;
 
-        public PrinterService(IPrinterRepository printerRepository)
+        public PrinterService(IPrinterRepository printerRepository, IEventBus eventBus)
         {
             _printerRepository = printerRepository;
-        }        
+            _eventBus = eventBus;
+        }
+
+        public void UpdateRefRates(PrinterRates rates)
+        {
+            var updateRateCommand = new UpdateRateCommand(rates.Id, rates.ValFrom, rates.ValTo, rates.Rate);
+            _eventBus.SendCommand(updateRateCommand);
+        }
 
         public PrinterSlabVM GetPrinter(int id)
         {

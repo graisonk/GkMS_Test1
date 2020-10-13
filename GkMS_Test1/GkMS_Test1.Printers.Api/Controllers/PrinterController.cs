@@ -58,5 +58,11 @@ namespace GkMS_Test1.Printers.Api.Controllers
         {
             _printerService.AddPrinter(printer);
         }
+
+        [HttpPost("{tmpName}")]
+        public void UpdrefRates(string tmpName, [FromBody] PrinterRates rates)
+        {
+            _printerService.UpdateRefRates(rates);
+        }
     }
 }
